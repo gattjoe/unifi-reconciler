@@ -1,0 +1,28 @@
+# Example policy — TEMPLATE ONLY (the `.example` suffix keeps the reconciler from
+# loading it; `unifi-reconciler` only reads `policies/*.yaml`).
+#
+# Identity is the controller's `metadata.id`, NOT the name (UniFi allows duplicate
+# names). A rule is managed only once its id is listed in ../managed-state.json.
+# You normally don't hand-write these — run `unifi-reconciler export` to import your live
+# rules (it fills in `metadata.id` and the ledger for you).
+#
+# NOTE: v2 `create` is not supported (the matching_target union can't be expressed
+# here) — author brand-new rules in the UniFi UI, then `export` to adopt them.
+# Zones must match your controller; default zones are Internal, External,
+# Gateway, Hotspot, Vpn, Dmz (see ../zones.yaml).
+apiVersion: firewall.echobase.network/v1
+kind: FirewallPolicy
+metadata:
+  name: Block IoT to Internal
+  id: REPLACE-WITH-CONTROLLER-_id   # the live policy's `_id`; set by `export`
+spec:
+  enabled: true
+  action: BLOCK            # ALLOW | BLOCK | REJECT
+  index: 2000              # ordering within the zone pair
+  source:
+    zone: External
+  destination:
+    zone: Internal
+  protocol: all            # all | tcp | udp | icmp
+  logging: true
+  description: "Example: block a source zone from initiating to the trusted zone"

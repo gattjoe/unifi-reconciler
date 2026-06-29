@@ -1,0 +1,5 @@
+{
+  "apiVersion": "firewall.echobase.network/v1",
+  "kind": "ManagedState",
+  "managed": []
+}

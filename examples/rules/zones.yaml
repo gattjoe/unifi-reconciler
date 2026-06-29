@@ -1,0 +1,20 @@
+# Informational map of firewall zones referenced by policies. Zones themselves
+# are managed in the UniFi UI; this file documents them and lets `unifi-reconciler`
+# validate that every policy references a zone that actually exists on the
+# controller. Edit to match the zones on YOUR controller (run `unifi-reconciler export`
+# to see them). These are the default UniFi zone-based firewall zones.
+apiVersion: firewall.echobase.network/v1
+kind: ZoneList
+zones:
+  - name: Internal
+    purpose: Trusted internal/LAN-side zone (admin access originates here — see UNIFI_ADMIN_ZONES)
+  - name: External
+    purpose: Internet uplink / WAN
+  - name: Gateway
+    purpose: The UDM gateway itself
+  - name: Hotspot
+    purpose: Guest hotspot zone
+  - name: Vpn
+    purpose: VPN clients
+  - name: Dmz
+    purpose: DMZ / isolated services

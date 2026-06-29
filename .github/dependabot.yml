@@ -1,0 +1,14 @@
+version: 2
+updates:
+  # Keep the SHA-pinned actions in release.yml current (Dependabot bumps the pin
+  # and updates the version comment).
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+
+  # Python deps declared in pyproject.toml.
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
